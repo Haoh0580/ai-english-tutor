@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+/* 設計 token：暖白紙感底色 + 墨色文字 + 靛藍品牌色 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #faf9f6;
+  --surface: #ffffff;
+  --ink: #16151c;
+  --muted: #6b6875;
+  --line: #e9e6df;
+  --brand: #4f46e5;
+  --brand-strong: #3730a3;
+  --brand-soft: #eef0ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #0d0c11;
+    --surface: #16151c;
+    --ink: #eeecf3;
+    --muted: #9b98a7;
+    --line: #27252f;
+    --brand: #8b8cf8;
+    --brand-strong: #a5a6fb;
+    --brand-soft: #1e1c3b;
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --font-sans: var(--font-geist-sans), "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif), "Noto Serif TC", serif;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+/* 打字中的三個點 */
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+.typing-dot {
+  animation: typing-dot 1.2s infinite ease-in-out;
+}
+
+/* 新訊息淡入 */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in {
+  animation: rise-in 0.28s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-dot, .rise-in { animation: none; }
 }
